@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-
 export const RecetasContext = createContext();
 
 const RecetasProvider = (props) => {
@@ -11,7 +10,7 @@ const RecetasProvider = (props) => {
         nombre: '',
         categoria: ''
     });
-
+    
     const [ consultar, guardarConsultar ] = useState(false);
 
     const {nombre, categoria } = busqueda;
@@ -27,13 +26,14 @@ const RecetasProvider = (props) => {
             }
             obtenerRecetas();
         }      
-    }, [busqueda])
+    }, [busqueda, categoria, consultar, nombre])
     
     return ( 
         <RecetasContext.Provider
             value={{
                 buscarReceta,
-                guardarConsultar
+                guardarConsultar,
+                recetas
             }}
         >
             {props.children}
